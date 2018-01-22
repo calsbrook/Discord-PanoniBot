@@ -1,0 +1,24 @@
+{
+  "name": "panoni-bot",
+  "version": "1.0.0",
+  "description": "Dumb bot",
+  "main": "firstBot.js",
+  "author": "calsbrook",
+  "dependencies": {
+    "discord.js": "^11.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calsbrook/Discord-PanoniBot.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/calsbrook/Discord-PanoniBot/issues"
+  },
+  "homepage": "https://github.com/calsbrook/Discord-PanoniBot#readme"
+}

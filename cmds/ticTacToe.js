@@ -1,32 +1,31 @@
 module.exports.run = async(client, message, args) => {
-
-    // var board = {};
-	// var score = {};
-	// var move;
-	// var turn;
-	// var numGames;
-	// var winner;
+    var board = {};
+	var score = {};
+	var move;
+	var turn;
+	var numGames;
+	var winner;
 	
-	// function game(message) {
-	// 	let p1 = startingPlayer.lastMessage.member.nickname
-	// 	message.channel.send(`Tic tac toe started \nPlayer 1: ${p1}\nWho is player 2?`)
-	// 	await message.channel.awaitMessages(msg => {
-	// 		console.log(msg)
-	// 	})
-	// 	// console.log('game running')
-	// 	init();
-	// 	numGames = 1;
-	// 	// play();
-	// }
+	function game(message) {
+		let p1 = message.member.nickname
+		message.channel.send(`Tic tac toe started \nPlayer 1: ${p1}\nWho is player 2?`)
+		// await message.channel.awaitMessages(msg => {
+		// 	console.log(msg)
+		// })
+		// console.log('game running')
+		init();
+		numGames = 1;
+		// play();
+	}
 	
-	// function init() {
-	// 	score = {
-	// 		X: 0,
-	// 		O: 0,
-	// 		T: 0,
-	// 	};
-	// 	turn = 'X';
-	// }
+	function init() {
+		score = {
+			X: 0,
+			O: 0,
+			T: 0,
+		};
+		turn = 'X';
+	}
 	
 	// function newGame() {
 	// 	board = {
@@ -113,7 +112,7 @@ module.exports.run = async(client, message, args) => {
 	// 		console.log(`X wins: ${score.X} | O wins: ${score.O} | Ties: ${score.T}`);
 	// 	}
 	// }
-	// game(message);
+	game(message);
 }
 
 module.exports.help = {

@@ -1,8 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-// const ttt = require('./ticTacToe')
-// var ping = require('./ping');
-var auth = require('./auth.json')
+const botSettings = require('./botSettings.json')
+var auth = require('./auth.json');
 
 const client = new Discord.Client();
 
@@ -41,31 +40,35 @@ client.on("ready", () => {
 
 
 client.on("message", async (message) => {
-	let cmd = client.commands.get(command.slice(prefix.length))
+	
+	let messageArray = message.content.split(' ');
+	let command = messageArray[0];
+	let args = messageArray.slice(1)
+	
+	let cmd = client.commands.get(command.slice(botSettings.prefix.length))
 	if (cmd) cmd.run(client, message, args)
 	if (message.author.bot) return;
-	const msg = message;
+	if (!command.startsWith(botSettings.prefix)) return;
+	
+	console.log(messageArray)
+
 
 	// makes sure the command works regardless of upper or lowercase
-	var input = message.content.toUpperCase();
+	// var input = message.content.toUpperCase();
 	
-	if(input === "HI") {
-		message.channel.send("Hey wassup hello!");
-	}
+	// if(input === "HI") {
+	// 	message.channel.send("Hey wassup hello!");
+	// }
 
 	// if(input === '!PING') {
 	// 	const m = await message.channel.send("Ping?");
 	// 	m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 	// }
 
-	if(input === 'YESNO') {
-		message.channel.send('test')
-	}
-
-	if(input === "TIC TAC TOE") {
-		// console.log('tic tac toe started')
-		// ticTacToe(msg, message.author);
-	}
+	// if(input === "TIC TAC TOE") {
+	// 	console.log('tic tac toe started')
+	// 	ticTacToe(msg, message.author);
+	// }
 });
 	
 	

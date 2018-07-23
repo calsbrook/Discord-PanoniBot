@@ -14,6 +14,7 @@ module.exports.run = async(client, message, args) => {
         'Signs point to yes',
         'Reply hazy',
         'Ask again later. Like much later',
+        client.emojis.find('name', 'goToJail'),
         "Better not tell you now, you'll do something stupid",
         'Cannot predict now',
         "Don't count on it",
@@ -25,11 +26,14 @@ module.exports.run = async(client, message, args) => {
         'Stop please',
         ball,
         'Insert dank meme',
-        "Maybe when you're older",
-        client.emojis.find('name', 'goToJail')
+        "Maybe when you're older"
     ]
     let randomNum = Math.floor(Math.random() * answers.length)
-    message.channel.send(`${ball}: ${answers[randomNum]}`)
+    if (args.length) {
+        message.channel.send(`${ball}: ${answers[randomNum]}`)
+    } else {
+        message.channel.send("No you have to ask a question")
+    }
 }
 
 module.exports.help = {

@@ -31,7 +31,7 @@ module.exports.run = async(client, message, args) => {
 	
 	function newGame() {
 		board = {
-			top: '--🇦 |  🅱 | 🇨',
+			top: '–-🇦 |  🅱 | 🇨',
 			line: '-----------',
 			A1: '🔲', A2: '🔲', A3: '🔲',
 			B1: '🔲', B2: '🔲', B3: '🔲',
@@ -40,7 +40,7 @@ module.exports.run = async(client, message, args) => {
 	}
 	
 	function drawBoard(message) {
-		message.channel.send(`${board.top}\n𝟷 ${board.A1} | ${board.B1} | ${board.C1}\n𝟸 ${board.A2} | ${board.B2} | ${board.C2}\n3 ${board.A3} | ${board.B3} | ${board.C3}`)
+		message.channel.send(`${board.top}\n𝟷 ${board.A1} | ${board.B1} | ${board.C1}\n𝟸 ${board.A2} | ${board.B2} | ${board.C2}\n𝟹 ${board.A3} | ${board.B3} | ${board.C3}`)
 	}
 	
 	function moveLookup(move) {
@@ -49,7 +49,6 @@ module.exports.run = async(client, message, args) => {
 			board[moveUpper] = turn;
 			return true
 		} else {
-			move.channel.send('Nope');
 			return false
 		}
 	}

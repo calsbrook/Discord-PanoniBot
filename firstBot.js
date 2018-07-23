@@ -34,9 +34,6 @@ client.on("message", async (message) => {
 	
 	let cmd = client.commands.get(command.slice(botSettings.prefix.length))
 	if (cmd) cmd.run(client, message, args)
-	// console.log(`C L I E N T: ${client}`)
-	// console.log(`M E S S A G E: ${message}`)
-	// console.log(`A R G S: ${args}`)
 	if (message.author.bot) return;
 	if (!command.startsWith(botSettings.prefix)) return;
 });

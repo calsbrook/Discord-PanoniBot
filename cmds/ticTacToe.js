@@ -49,7 +49,7 @@ module.exports.run = async(client, message, args) => {
 			board[moveUpper] = turn;
 			return true
 		} else {
-			move.message.channel.send('Nope');
+			move.channel.send('Nope');
 			return false
 		}
 	}

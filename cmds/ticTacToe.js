@@ -20,7 +20,12 @@ module.exports.run = async(client, message, args) => {
 		// }, {time: 5000})
 		newGame();
 		// numGames = 1;
-		play(message);
+		drawBoard(message)
+		message.channel.awaitMessages(msg => {
+			if (msg.author.bot) return;
+			play(msg)
+		})
+		// play(message);
 		
 		// message.channel.awaitMessages(msg => {
 		// 	if (msg.author.bot) return;
@@ -36,28 +41,29 @@ module.exports.run = async(client, message, args) => {
 			O: 0,
 			T: 0,
 		};
-		turn = 'X';
+		turn = '❌';
 	}
 	
 	function newGame() {
 		board = {
-			top: '--A   B   C',
+			top: '--🇦 |  🅱 | 🇨',
 			line: '-----------',
-			A1: ' ', A2: ' ', A3: ' ',
-			B1: ' ', B2: ' ', B3: ' ',
-			C1: ' ', C2: ' ', C3: ' '
+			A1: '🔲', A2: '🔲', A3: '🔲',
+			B1: '🔲', B2: '🔲', B3: '🔲',
+			C1: '🔲', C2: '🔲', C3: '🔲'
 		};
 	}
 	
 	function drawBoard(message) {
 		console.log(`draw board`)
-		message.channel.send(`${board.top}\n${board.line}\n1 ${board.A1}  |  ${board.B1}  |  ${board.C1}\n${board.line}\n2 ${board.A2}  |  ${board.B2}  |  ${board.C2}\n${board.line}\n3 ${board.A3}  |  ${board.B3}  |  ${board.C3}`)
+		message.channel.send(`${board.top}\n𝟷 ${board.A1} | ${board.B1} | ${board.C1}\n𝟸 ${board.A2} | ${board.B2} | ${board.C2}\n3 ${board.A3} | ${board.B3} | ${board.C3}`)
 	}
 	
 	function moveLookup(move) {
-		move = move.toUpperCase
+		let moveUpper = move.content.toUpperCase()
 
-		console.log('move lookup')
+		console.log(`move lookup: ${move}`)
+		console.log(move)
 		// client.on("message", message => {
 		// 	var input = message.content.toUpperCase();
 		// 	if (input in board && board[input]) {
@@ -68,21 +74,22 @@ module.exports.run = async(client, message, args) => {
 		// }
 
 		// (`${turn}'s move`).toUpperCase();
-		if (move in board && board[move]) {
-			board[move] = turn;
+		if (moveUpper in board && board[moveUpper]) {
+			board[moveUpper] = turn;
+			return true
 		} else {
-			// message.channel.send('Nope');
-			console.log('nope')
-			play(message);
+			move.message.channel.send('Nope');
+			return false
+			// console.log('nopes')
 		}
 		// )
 	}
 	
 	function switchTurn() {
-		if (turn === 'X') {
-			turn = 'O';
+		if (turn === '❌') {
+			turn = '⭕';
 		} else {
-			turn = 'X';
+			turn = '❌';
 		}
 	}
 	
@@ -104,14 +111,18 @@ module.exports.run = async(client, message, args) => {
 		// }
 		if (!winner) {
 			console.log('play start');
-			drawBoard(message)
-			message.channel.awaitMessages(msg => {
-				if (msg.author.bot) return;
-				moveLookup(msg.content)
+			if (moveLookup(message)) {
+				drawBoard(message)
+				checkWin(message);
+				switchTurn();
+			}
+			// message.channel.awaitMessages(msg => {
+			// 	if (msg.author.bot) return;
+			// 	moveLookup(msg.content)
 				// switchTurn();
 				// checkWin(message);
 				// play(message)
-			})
+			// })
 		} else {
 			message.channel.send('Bye')
 		}
@@ -133,7 +144,7 @@ module.exports.run = async(client, message, args) => {
 			board.A1 + board.B2 + board.C3,
 			board.A3 + board.B2 + board.C1,
 		];
-		if (any(winningCombos, 'XXX') || any(winningCombos, 'OOO')) {
+		if (any(winningCombos, '❌❌❌') || any(winningCombos, '⭕⭕⭕')) {
 			drawBoard(message);
 			winner = turn;
 			score[winner] += 1;

@@ -45,7 +45,7 @@ module.exports.run = async(client, message, args) => {
 	
 	function moveLookup(move) {
 		let moveUpper = move.content.toUpperCase()
-		if (moveUpper in board && board[moveUpper]) {
+		if (moveUpper in board && board[moveUpper] === '🔲') {
 			board[moveUpper] = turn;
 			return true
 		} else {

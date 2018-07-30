@@ -17,7 +17,7 @@ module.exports.run = async(client, message, args) => {
                 message.channel.send("You've stumped me")
         }
     } else {
-        message.channel.send("These are the subjects you can get info on:\n1)8ball\n2)ping\n3)ticTacToe\n4)vote");
+        message.channel.send("These are the subjects you can get info on:\n1) 8ball\n2) ping\n3) ticTacToe\n4) vote");
     }
 }
 

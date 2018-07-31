@@ -24,7 +24,7 @@ fs.readdir('./cmds/', (err, files) => {
 
 client.on("ready", () => {
 	console.log("I am ready!");
-	client.user.setGame('!info for command help');
+	client.user.setActivity('!info for command help', {type: 'PLAYING'});
 });
 
 

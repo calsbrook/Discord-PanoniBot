@@ -12,15 +12,16 @@ module.exports.run = async(client, message, args) => {
     if (args.length && !msg) {
         question = args.join(' ')
         msg = await message.channel.send(`Vote: ${question}\nYou have one hour!`)
+        await msg.pin()
         await msg.react(agree);
         await msg.react(disagree);
     } else if (!args.length && msg) {
         message.channel.send(`https://discordapp.com/channels/${msg.guild.id}/${msg.channel.id}/${msg.id}`);
     } else if (!args.length && !msg) {
-        message.channel.send('There is no current vote');
+        message.channel.send('There is no current vote. Start one by typing `!vote` *your question*');
     }
-    if (msg && args.length) {
 
+    if (msg && args.length) {
         const reactions = await msg.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: hour});
     
         if (reactions.get(agree) && reactions.get(disagree)) {
@@ -34,6 +35,7 @@ module.exports.run = async(client, message, args) => {
         } else if (agreeTotal < disagreeTotal) {
             result = 2
         }
+
         let embed = new Discord.RichEmbed()
             .setTitle('Results')
             .setColor(0xef971b)
@@ -42,7 +44,9 @@ module.exports.run = async(client, message, args) => {
             .addField(`${agree}Agree`, agreeTotal, true)
             .addField(`${disagree}Disagree`, disagreeTotal, true)
             .setFooter(results[result])
+
         message.channel.send({embed})
+        msg.unpin()
         msg = false;
         question = false;
     }

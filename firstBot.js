@@ -32,6 +32,13 @@ client.on("message", async (message) => {
 	let messageArray = message.content.split(' ');
 	let command = messageArray[0];
 	let args = messageArray.slice(1)
+
+	messageArray.forEach(function (word) {
+		if (word.includes("tumblr_pdc7iaBNrE1wxh6g4o1_640.png")) {
+			message.delete();
+			message.channel.send(`${client.emojis.find('name', 'goToJail')}Sam stop`)
+		}
+	})
 	
 	let cmd = client.commands.get(command.slice(botSettings.prefix.length))
 	if (cmd) cmd.run(client, message, args)

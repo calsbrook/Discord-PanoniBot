@@ -36,7 +36,7 @@ client.on("message", async (message) => {
 	messageArray.forEach(function (word) {
 		if (word.includes("tumblr_pdc7iaBNrE1wxh6g4o1_640.png")) {
 			message.delete();
-			message.channel.send(`${client.emojis.find('name', 'goToJail')}Sam stop`)
+			message.channel.send(`${client.emojis.find('name', 'goToShitHell')}${message.author} stop`)
 		}
 	})
 	

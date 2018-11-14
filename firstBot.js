@@ -1,9 +1,12 @@
 const Discord = require('discord.js');
+const vision = require('@google-cloud/vision')
 const fs = require('fs');
 const botSettings = require('./botSettings.json')
+const GOOGLE_APPLICATION_CREDENTIALS = require('./discordBotPanoni-471ac87f8245.json')
 var auth = require('./auth.json');
 
 const client = new Discord.Client();
+const googleClient = new vision.ImageAnnotatorClient();
 
 client.commands = new Discord.Collection()
 
@@ -32,13 +35,15 @@ client.on("message", async (message) => {
 	let messageArray = message.content.split(' ');
 	let command = messageArray[0];
 	let args = messageArray.slice(1)
-
-	messageArray.forEach(function (word) {
-		if (word.includes("tumblr_pdc7iaBNrE1wxh6g4o1_640.png")) {
-			message.delete();
-			message.channel.send(`${client.emojis.find('name', 'goToShitHell')}${message.author} stop`)
-		}
-	})
+	if(!!message.attachments) {
+		console.log(message.attachments.find(item => item.url).url)
+	}
+	// messageArray.forEach(function (word) {
+	// 	if (word.includes("tumblr_pdc7iaBNrE1wxh6g4o1_640.png")) {
+	// 		message.delete();
+	// 		message.channel.send(`${client.emojis.find('name', 'goToShitHell')}${message.author} stop`)
+	// 	}
+	// })
 	
 	let cmd = client.commands.get(command.slice(botSettings.prefix.length))
 	if (cmd) cmd.run(client, message, args)

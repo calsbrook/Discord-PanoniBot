@@ -35,8 +35,19 @@ client.on("message", async (message) => {
 	let messageArray = message.content.split(' ');
 	let command = messageArray[0];
 	let args = messageArray.slice(1)
-	if(!!message.attachments) {
-		console.log(message.attachments.find(item => item.url).url)
+	if(message.attachments.find(item => item.url)) {
+		googleClient
+			.textDetection(message.attachments.find(item => item.url).proxyURL)
+			.then(results => {
+				var detections = results[0].textAnnotations;
+					if(detections[0] && detections[0].description === 'hey so um\nthere\'s this girl\nand um\n') {
+						message.channel.send(`${client.emojis.find('name', 'goToShitHell')}${message.author} You have posted the forbidden image`)
+						message.delete();
+					}
+			})
+			.catch(err => {
+				console.error('ERROR:', err);
+			})
 	}
 	// messageArray.forEach(function (word) {
 	// 	if (word.includes("tumblr_pdc7iaBNrE1wxh6g4o1_640.png")) {

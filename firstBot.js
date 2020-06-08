@@ -49,12 +49,6 @@ client.on("message", async (message) => {
 				console.error('ERROR:', err);
 			})
 	}
-	// messageArray.forEach(function (word) {
-	// 	if (word.includes("tumblr_pdc7iaBNrE1wxh6g4o1_640.png")) {
-	// 		message.delete();
-	// 		message.channel.send(`${client.emojis.find('name', 'goToShitHell')}${message.author} stop`)
-	// 	}
-	// })
 	
 	let cmd = client.commands.get(command.slice(botSettings.prefix.length))
 	if (cmd) cmd.run(client, message, args)

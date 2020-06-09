@@ -11,7 +11,7 @@ module.exports.run = async(client, message, args) => {
             let bigString = ''
             for (j=0; j<args[i].length; j++) {
                 if (/^[a-zA-Z]+$/.test(args[i][j])){
-                    bigString += ":regional_indicator_" + args[i][j] + ":"
+                    bigString += ":regional_indicator_" + args[i][j].toLowerCase() + ":"
                 } else if (/^\d+$/.test(args[i][j])){
                     bigString += `:${digits[parseInt(args[i][j])]}:`
                 } else if (args[i][j] === '!'){
@@ -27,7 +27,7 @@ module.exports.run = async(client, message, args) => {
             splitMessage.push(bigString)
         }
     }
-    
+
     for (i=0; i<splitMessage.length; i++) {
         bigMessage += splitMessage[i]
     }

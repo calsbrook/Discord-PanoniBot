@@ -5,7 +5,7 @@ module.exports.run = async(client, message, args) => {
     let splitMessage = []
 
     for (i=0; i<args.length; i++){
-        if(args[i].search('<:') === 0 || args[i].search(':') === 0) {
+        if(args[i].search('<') === 0 || args[i].search(':') === 0) {
             splitMessage.push(args[i])
         } else {
             let bigString = ''

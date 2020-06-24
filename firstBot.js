@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const vision = require('@google-cloud/vision')
 const fs = require('fs');
 const botSettings = require('./botSettings.json')
-const GOOGLE_APPLICATION_CREDENTIALS = require('./discordBotPanoni-471ac87f8245.json')
+//const GOOGLE_APPLICATION_CREDENTIALS = require('./discordBotPanoni-471ac87f8245.json')
 var auth = require('./auth.json');
 
 const client = new Discord.Client();
@@ -40,13 +40,14 @@ client.on("message", async (message) => {
 			.textDetection(message.attachments.find(item => item.url).proxyURL)
 			.then(results => {
 				var detections = results[0].textAnnotations;
-					if(detections[0] && detections[0].description === 'hey so um\nthere\'s this girl\nand um\n') {
+					if(detections[0] && detections[0].description.search('hey so um')>=0) {
 						message.channel.send(`${client.emojis.find('name', 'goToShitHell')}${message.author} You have posted the forbidden image`)
 						message.delete();
 					}
 			})
 			.catch(err => {
 				console.error('ERROR:', err);
+				throw err;
 			})
 	}
 	
